@@ -45,6 +45,7 @@ If you use TensorFlow Model Garden in your research, please cite this repository
   year = {2020}
 }
 ```
+# Getting started
 
 ## Drivers and packages
 Make sure the correct nvidia gpu driver is installed as different come with different cuda versions
