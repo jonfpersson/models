@@ -47,6 +47,29 @@ If you use TensorFlow Model Garden in your research, please cite this repository
 ```
 # Getting started
 
+## First clone the master branch of the Tensorflow Models repository:
+
+git clone https://github.com/jonfpersson/models.git
+
+## Python Package Installation
+```
+cd models/research
+
+protoc object_detection/protos/*.proto --python_out=.
+
+cp object_detection/packages/tf2/setup.py .
+python -m pip install .
+```
+
+Test installation by running:
+```
+python object_detection/builders/model_builder_tf2_test.py
+```
+
+## Download model
+In this project, I downloaded EfficientDet D0 512x512 from
+https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_detection_zoo.md
+
 ## Drivers and packages
 Make sure the correct nvidia gpu driver is installed as different come with different cuda versions
 Install graphics 460 first for cuda 11.2
@@ -54,7 +77,8 @@ Install graphics 460 first for cuda 11.2
 then install dev and runtime deb packages for cudnn 8.1
 
 ## Download model
-Be sure to download the correct model from the Tensorflow model garden and point ssd_efficientdet_d0_512x512_coco17_tpu-8.config to the model.
+Be sure to download the correct model from the Tensorflow model garden and point ssd_efficientdet_d0_512x512_coco17_tpu-8.config to the models ckpt-0.
+E.g fine_tune_checkpoint: "/home/jonfp/Downloads/efficientdet_d0_coco17_tpu-32/checkpoint/ckpt-0"
 
 ## How to run tensorflow trained network
 Make sure the training folder is empty before training
