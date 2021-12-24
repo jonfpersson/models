@@ -46,37 +46,41 @@ If you use TensorFlow Model Garden in your research, please cite this repository
 }
 ```
 
-#Getting started
-
 ## Drivers and packages
 Make sure the correct nvidia gpu driver is installed as different come with different cuda versions
 Install graphics 460 first for cuda 11.2
 
 then install dev and runtime deb packages for cudnn 8.1
 
-##Download model
+## Download model
 Be sure to download the correct model from the Tensorflow model garden and point ssd_efficientdet_d0_512x512_coco17_tpu-8.config to the model.
 
 ## How to run tensorflow trained network
 Make sure the training folder is empty before training
+```
 python3 model_main_tf2.py     --pipeline_config_path=configs/tf2/ssd_efficientdet_d0_512x512_coco17_tpu-8.config     --model_dir=training     --alsologtostderr
-
+```
 ## Start website tracking the training process
+```
 tensorboard --logdir=training/train
+```
 
 ## Start validation procces (During training, need more gpu memory to work)
+```
 python3 model_main_tf2.py \
   --pipeline_config_path=configs/tf2/ssd_efficientdet_d0_512x512_coco17_tpu-8.config \
   --model_dir=/home/jonfp/Downloads/centernet_hg104_512x512_coco17_tpu-8/saved_model \
   --checkpoint_dir=training \
   --num_workers=1 \
   --sample_1_of_n_eval_examples=1
-
+```
 
 ## Export trained model:
+```
 python3 exporter_main_v2.py     --trained_checkpoint_dir=training     --pipeline_config_path=configs/tf2/ssd_efficientdet_d0_512x512_coco17_tpu-8.config     --output_directory inference_graph
-
+```
 
 ## Use the model on webcam:
+```
 python3 stream.py -l /home/jonfp/racc/test/raccoons_label_map.pbtxt -m /home/jonfp/Downloads/models/research/object_detection/inference_graph/saved_model/
-
+```
